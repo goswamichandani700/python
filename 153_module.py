@@ -1,11 +1,11 @@
+   
+
+
 import currency
 
-dollar = int(input("enter dollar"))
-euro = int(input("enter euro"))
-yen = int(input("enter yen"))
-pound = int(input("enter pound"))
+rupees = int(input("Enter rupees: "))
 
-print('dollar',currency.dollartorupees(dollar))
-print('euro',currency.eurotorupees(euro))
-print('yen',currency.yentorupees(yen))
-print('pound',currency.poundtorupees(pound))
+print("Dollar:", currency.toDollar(rupees))
+print("Euro:", currency.toEuro(rupees))
+print("Yen:", currency.toYen(rupees))
+print("Pound:", currency.toPound(rupees))
