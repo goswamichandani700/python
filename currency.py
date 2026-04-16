@@ -1,17 +1,19 @@
-# create module currency.py that has functions  to convert given indian rupees into different currency
+#  create module currency.py that has functions  to convert given indian rupees into different currency
 #     toDollar()
 #     toEuro()
 #     toYen()
 #     toPound()
 
-def dollartorupees(dollar):
-    return dollar * 83
+# convert Rupees to other currencies
 
-def eurotorupees(euro):
-    return euro * 90
+def toDollar(rupees):
+    return rupees / 83
 
-def yentorupees(yen):
-    return yen * 0.55
+def toEuro(rupees):
+    return rupees / 90
 
-def poundtorupees(pound):
-    return pound * 105 
+def toYen(rupees):
+    return rupees / 0.55
+
+def toPound(rupees):
+    return rupees / 105
