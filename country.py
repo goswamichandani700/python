@@ -1,27 +1,30 @@
-africa_countries = [
-    "Algeria", "Angola",
-    "Benin", "Botswana", "Burkina Faso", "Burundi",
-    "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Comoros", "Congo (Republic)", "Congo (Democratic Republic)",
-    "Djibouti",
-    "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia",
-    "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau",
-    "Ivory Coast",
-    "Kenya",
-    "Lesotho", "Liberia", "Libya",
-    "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique",
-    "Namibia", "Niger", "Nigeria",
-    "Rwanda",
-    "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan",
-    "Tanzania", "Togo", "Tunisia",
-    "Uganda",
-    "Zambia", "Zimbabwe"
+asia_countries = [
+    "Afghanistan", "Armenia", "Azerbaijan",
+    "Bahrain", "Bangladesh", "Bhutan", "Brunei",
+    "Cambodia", "China", "Cyprus",
+    "Georgia",
+    "India", "Indonesia", "Iran", "Iraq", "Israel",
+    "Japan", "Jordan",
+    "Kazakhstan", "Kuwait", "Kyrgyzstan",
+    "Laos", "Lebanon",
+    "Malaysia", "Maldives", "Mongolia", "Myanmar",
+    "Nepal", "North Korea",
+    "Oman",
+    "Pakistan", "Palestine", "Philippines",
+    "Qatar",
+    "Russia",
+    "Saudi Arabia", "Singapore", "South Korea", "Sri Lanka", "Syria",
+    "Taiwan", "Tajikistan", "Thailand", "Timor-Leste", "Turkey", "Turkmenistan",
+    "United Arab Emirates", "Uzbekistan",
+    "Vietnam",
+    "Yemen"
 ]
 
 def getCountry():
-    global africa_countries
-    return africa_countries
+    global asia_countries
+    return asia_countries
 
 def hasCountry(countryName):
-    global africa_countries
-    result = countryName in africa_countries
+    global asia_countries
+    result = countryName in asia_countries
     return result
