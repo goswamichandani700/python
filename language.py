@@ -1,17 +1,18 @@
-south_india = [
-    "Kannada",
-    "Malayalam",
-    "Tamil",
-    "Telugu"
+west_india = [
+    "Gujarati",
+    "Konkani",
+    "Marathi",
+    "Rajasthani"
 ]
+
 def getlanguage():
-    global south_india
-    return south_india
+   global west_india
+   return west_india
     
    
 
 def islanguageexist(languagename):
-    global south_india
-    result = languagename in south_india
-    return result
+   global west_india
+   result = languagename in west_india
+   return result
     
