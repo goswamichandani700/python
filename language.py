@@ -1,21 +1,20 @@
-east_india = [
-    "Assamese",
-    "Bengali",
-    "Bodo",
-    "Maithili",
-    "Manipuri",
-    "Odia",
-    "Santali"
+north_india = [
+    "Dogri",
+    "Hindi",
+    "Kashmiri",
+    "Punjabi",
+    "Sanskrit",
+    "Urdu"
 ]
 
 def getlanguage():
-   global east_india
-   return east_india
+   global north_india
+   return north_india
     
    
 
 def islanguageexist(languagename):
-   global east_india
-   result = languagename in east_india
+   global north_india
+   result = languagename in north_india
    return result
     
