@@ -1,15 +1,16 @@
 #write a program to findout area & volume of cylinder.
 
-#input
-area = input("area")
-area = float(area)
+radius = input('Enter radius')
+height = input("Enter height")
 
-volume = input("volume")
-volume = float(volume)
+radius = int(radius)
+height = int(height)
 
-#process
-cylinder = 2 * 3.14 * 45,(23+45)
-print("area of cylinder",cylinder)
+area = 2 * 3.14 * radius * (height+radius)
+volume = 3.14 * radius * radius * height
+print("area",area)
 
-volume = 3.14 * 60 * 60 * 57
 print("volume",volume)
+
+
+
