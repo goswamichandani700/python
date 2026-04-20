@@ -2,16 +2,19 @@
 # take input car
 # input train 
 
-car = int(input("enter price"))
-train = int(input("enter price"))
-travel = car - train
-print(f"cheaper {travel}")
+average = int(input("enter average"))
+km = int(input("enter km"))
+petrol = int(input("enter petrol"))
+train_price = int(input("enter price"))
+car = (km/average) * petrol
+print(car) 
+if car>train_price:
+    print("train price is cheaper")
+if train_price>car:
+    print("car is cheaper")
 
-if car>0:
-    print(f"price of {car}")
 
-if train>0:
-    print(f"price of{train}") 
+
 
 
 
