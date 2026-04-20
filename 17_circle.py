@@ -1,13 +1,12 @@
 #write a program to findout area of circle.
 
 #input
-area = input("area")
+radius = float(input("enter radius"))
 
-#convert
-area = float(area)
+
 
 #process
-area = 3.14 * 12 * 12
+area = 3.14 * radius * radius
 
 #output
 print("area",area)
