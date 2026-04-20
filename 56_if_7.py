@@ -13,11 +13,11 @@ dollar = int(input("enter rate"))
 price2 = usa_price * dollar
 print(price2)
 
-if india_price>0:
-    print(f"price of {india_price}")
+if price2>india_price:
+    print("indian price is cheaper")
 
-if price2>0:
-    print(f"price of {price2}")   
+if india_price>price2:
+    print("usa price is cheaper")   
 
 
 
