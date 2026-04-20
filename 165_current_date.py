@@ -15,7 +15,7 @@ print(indian_format_date)
 # hh:mm:ss
 from datetime import datetime as dt
 current_hours = dt.now()
-print(current_hours.strftime("%H:%M:%S"))
+print(current_hours.strftime("%HH:%MM:%SS"))
 
 
 
