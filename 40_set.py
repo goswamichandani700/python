@@ -19,11 +19,10 @@ unique_olympic_2016 =set(olympic_2016)
 print(unique_olympic_2016)
 
 #findout common sports in both set & display it.
-print(unique_olympic_2022.intersection(olympic_2022))
-print(unique_olympic_2016.intersection(olympic_2016))
+print(unique_olympic_2022.intersection (set(olympic_2016)))
+
 
 #findout sports in olympic 2022 but not in 2016 & display it.
-print(unique_olympic_2016.difference(olympic_2016))
-print(unique_olympic_2022.difference(olympic_2022))
+print(unique_olympic_2022.difference (set(olympic_2016)))
 
 
