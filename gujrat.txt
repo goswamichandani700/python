@@ -1,0 +1,41 @@
+
+1 Ahmedabad is the largest city of Gujarat and a major business hub
+2 Surat is famous for diamond cutting and textile industry
+3 Vadodara is known for its culture and royal heritage
+4 Rajkot is an important industrial city in Saurashtra
+5 Bhavnagar is known for ship breaking yard and trade
+6 Jamnagar is famous for oil refineries and brass industry
+7 Junagadh is known for Girnar hills and historical places
+8 Gandhinagar is the capital city of Gujarat
+9 Anand is famous for milk production and Amul dairy
+10 Morbi is known for ceramic industry and tiles
+11 Mehsana is known for dairy and oil production
+12 Palanpur is an important city in Banaskantha district
+13 Bharuch is one of the oldest cities and known for industry
+14 Vapi is a major industrial area in south Gujarat
+15 Navsari is known for Parsi culture and farming
+16 Valsad is famous for mangoes and coastal area
+17 Porbandar is the birthplace of Mahatma Gandhi
+18 Surendranagar is known for cotton and salt production
+19 Amreli is known for agriculture and rural culture
+20 Godhra is an important city in Panchmahal district
+21 Dahod is a tribal dominated area with rich culture
+22 Patan is famous for Rani ki Vav and Patola sarees
+23 Modasa is a developing city in Aravalli district
+24 Veraval is known for fishing industry and Somnath temple
+25 Dwarka is a holy city related to Lord Krishna
+26 Bhuj is known for Kutch culture and handicrafts
+27 Gandhidham is an important port and trade city
+28 Ankleshwar is a major industrial and chemical hub
+29 Himmatnagar is known for pottery and farming
+30 Nadiad is known for education and temples
+31 Botad is known for agriculture and business
+32 Deesa is an important town in north Gujarat
+33 Kalol is known for industries and oil fields
+34 Halol is an industrial town near Vadodara
+35 Jetpur is famous for textile printing
+36 Mangrol is known for fishing and coastal life
+37 Una is a small town near Gir forest
+38 Keshod is known for agriculture and airport
+
+
