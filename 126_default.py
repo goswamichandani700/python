@@ -8,10 +8,10 @@ kb = int(input('enter kb'))
 
 # Example usage
 result = get_total_bytes(gb,mb,kb)
-print("result into seconds using 3 arguments",result)
+print("result into bytes using 3 arguments",result)
 
 result = get_total_bytes(gb,mb)
-print("result into seconds using 2 arguments",result)
+print("result into bytes using 2 arguments",result)
 
 result = get_total_bytes(gb)
-print("result into seconds using 1 arguments",result)
+print("result into bytes using 1 arguments",result)
