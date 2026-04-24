@@ -10,7 +10,8 @@ students = {
 for marks in students:
     # print(marks, students[marks])
     if students[marks]<35:
-        print(f'{students[marks]}')
+        print(marks, "=", students[marks])
+         
     
     
       
