@@ -1,4 +1,4 @@
-#multiple inheritance 
+#multilevel inheritance 
 #create parent class
 class Person:
     def walk(self):

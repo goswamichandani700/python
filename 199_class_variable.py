@@ -17,6 +17,7 @@ class tour:
       print("days",self.days)
       print("price",self.price)
       print("details",self.details)
+      print('operator',tour.operator)
 
    # create object
 t1 = tour(1, "Goa Tour", 3, 10000, "Beach + Hotel")
