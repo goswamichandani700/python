@@ -1,0 +1,267 @@
+create table student (
+    id int PRIMARY KEY AUTO_INCREMENT, 
+    fullname VARCHAR(128) NOT NULL, 
+    gender VARCHAR(6) NOT NULL, 
+    dob date not null, 
+    email varchar(128) unique not null, 
+    mobile varchar(10) unique not null,) 
+------------------------------------------------------
+create table employee(empid int primary key AUTO_INCREMENT,
+   empname varchar(128) NOT NULL,
+   salary FLOAT check (salary > 10000),
+   department VARCHAR(50), 
+   joining_date DATE)  
+------------------------------------------------------------
+create a table named product with:
+
+create table product(
+      productid INT PRIMARY KEY AUTO_INCREMENT,
+      productname VARCHAR(128) NOT NULL,
+      price float check (price > 0),
+      stock INT,
+      status VARCHAR(50) default 'Available')
+-------------------------------------------------------------------
+create a table named 'course' with
+
+create table course(
+   courseid INT PRIMARY KEY AUTO_INCREMENT,
+   coursename VARCHAR(128) NOT NULL,
+   fees FLOAT,
+   duration varchar(50)
+)
+
+19. Increase the height of all teachers by 1 foot.
+update teacher set height=height+1
+
+20. Increase the weight of all teachers by 5 kg.
+update teacher set weight = weight+5
+
+21. Change the weight of Rahul Sharma to 100 kg.
+update teacher set weight=100 where fullname='rahul sharma'
+
+22. Change the gender of teacher id 5 to female.
+update teacher set fullname='monika sharma', gender='female' where id=5
+
+23. Update the email address of Vikram Singh.
+UPDATE teacher SET email = 'visingh@gmail.com' WHERE email = 'vivaan2@gmail.com';
+
+24. Increase the height of all female teachers by 0.5 feet.
+UPDATE teacher 
+SET height = height + 0.5 
+WHERE gender = 'Female'
+
+25. Set the photo field to "default.jpg" for all teachers.
+UPDATE teacher 
+SET photo = 'default.jpg' 
+WHERE photo = 'photo.jpg'
+
+26. Change the mobile number of teacher id 25.
+update teacher set mobile=12345678 where id=25
+
+-------------------------------------------------
+
+27. Display all teacher records.
+select * from teacher 
+
+
+28. Display only fullname and email.
+select fullname, email from teacher 
+
+
+29. Display fullname, mobile, and weight.
+select fullname, mobile, weight from teacher
+
+
+30. Display all teachers sorted by fullname.
+
+select * from teacher order by fullname asc 
+OR 
+select * from teacher order by fullname 
+
+
+
+31. Display all teachers sorted by weight.
+select * from teacher order by weight
+
+
+
+32. Display only first 10 teacher records.
+
+select * from teacher limit 0,10
+
+
+33. Display the first 5 teachers sorted by date of birth.
+select * from teacher order by dob asc limit 0,5
+
+----------------------------------------------------
+## Part 6: WHERE Clause Exercises
+
+34. Display all male teachers.
+select id,fullname,email,gender from teacher where gender='male'
+
+35. Display all female teachers.
+select id,fullname,email,gender from teacher where gender='female'
+
+36. Display teachers whose weight is above 80 kg.
+select id,fullname,email,gender,weight from teacher where weight>80
+
+37. Display teachers whose weight is below 60 kg.
+select id,fullname,email,gender,weight from teacher where weight<60
+
+38. Display teachers whose height is greater than 5.8 feet.
+select id,fullname,email,gender,height from teacher where height>5.8
+
+39. Display teachers born after 2000.
+select id,fullname,dob from teacher where dob>'2000-12-31' order by dob 
+
+40. Display teachers born before 2001.
+select id,fullname,dob from teacher where dob<'2001-12-31' order by dob 
+
+
+41. Display teachers whose name is Rahul Sharma.
+SELECT * 
+FROM teacher 
+WHERE fullname = 'aditya verma'
+
+
+42. Display teachers whose email contains "gmail.com".
+SELECT * 
+FROM teacher 
+WHERE email LIKE '%gmail.com%'
+
+43. Display teachers whose weight is between 70 and 80.
+SELECT * 
+FROM teacher 
+WHERE weight BETWEEN 70 AND 80
+
+44. Display teachers whose height is between 5.4 and 5.8.
+SELECT * 
+FROM teacher 
+WHERE height BETWEEN 7.1 AND 8.8;
+---
+
+## Part 7: ORDER BY Exercises
+
+45. Display teachers sorted by fullname ascending.
+select * from teacher order by fullname asc 
+
+46. Display teachers sorted by fullname descending.
+select * from teacher order by fullname desc 
+
+47. Display teachers sorted by weight ascending.
+select * from teacher order by weight asc
+
+48. Display teachers sorted by weight descending.
+select * from teacher order by weight desc
+
+49. Display teachers sorted by date of birth.
+select * from teacher order by dob asc
+
+50. Display teachers sorted by gender and fullname.
+select * from teacher order by gender and fullname asc
+
+---
+
+## Part 8: Aggregate Function Exercises
+
+51. Count total teachers.
+select count(*) from teacher
+
+
+
+52. Count total male teachers.
+select count(*) from teacher where gender='male'
+
+53. Count total female teachers.
+select count(*) from teacher where gender='female'
+
+54. Find maximum weight.
+select max(weight) from teacher
+
+55. Find minimum weight.
+select min(weight) from teacher
+
+56. Find average weight.
+select avg(weight) from teacher
+
+
+57. Find total weight of all teachers.
+select sum(weight) from teacher
+
+58. Find maximum height.
+select max(height) from teacher
+
+59. Find minimum height.
+ select max(height) from teacher
+
+
+60. Find average height.
+ select max(height) from teacher
+
+----------------------------
+ ## Part 9: GROUP BY Exercises
+
+61. Count teachers by gender.
+SELECT gender, COUNT(*) 
+FROM teacher 
+GROUP BY gender
+
+62. Find average weight by gender.
+SELECT gender, avg(weight) 
+FROM teacher 
+GROUP BY gender
+
+63. Find maximum weight by gender.
+SELECT gender, max(weight) 
+FROM teacher 
+GROUP BY gender
+
+64. Find minimum weight by gender.
+SELECT gender, min(weight) 
+FROM teacher 
+GROUP BY gender
+
+65. Count teachers born in each year.
+SELECT YEAR(dob) AS birth_year, COUNT(*) 
+FROM teacher 
+GROUP BY YEAR(dob)
+
+66. Count teachers having Gmail accounts grouped by gender.
+SELECT email, COUNT(*) 
+FROM teacher 
+GROUP BY gender 
+LIMIT 0, 50
+---
+
+## Part 10: HAVING Clause Exercises
+
+67. Display gender groups having more than 20 teachers.
+SELECT gender, COUNT(*) AS total_teachers
+FROM teacher 
+GROUP BY gender 
+HAVING COUNT(*) > 20
+
+68. Display birth years having more than 3 teachers.
+SELECT dob, COUNT(*) AS total_teachers
+FROM teacher 
+GROUP BY dob 
+HAVING COUNT(*) > 3
+
+69. Display gender groups whose average weight exceeds 70 kg.
+SELECT gender, AVG(weight) AS average_weight
+FROM teacher
+GROUP BY gender
+HAVING AVG(weight) > 70
+
+
+70. Display groups where total weight exceeds 1000 kg.
+SELECT gender, SUM(weight) AS total_weight
+FROM teacher
+GROUP BY gender
+HAVING SUM(weight) > 1000
+
+
+
+
+
+

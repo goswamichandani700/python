@@ -1,0 +1,452 @@
+SQL Command 
+---------------------------------
+What is constraint?
+  constraint means rules that we apply on fields. this rules must be obeyed at the time of inserting or updating row in table. if these are violated (not followed)  then row will not be inserted/updated 
+
+ 1. PRIMARY KEY Constraint
+- Description: Uniquely identifies each record in a table. 
+    It cannot be NULL and must be unique.
+- Features: Automatically creates a clustered index.
+- Usage: One table can have only one Primary Key (can be single or composite).
+- Example: `id INT PRIMARY KEY`
+
+ 2. FOREIGN KEY Constraint
+- Description: Ensures referential integrity between two tables. It links a column in one table to the PRIMARY KEY in another table.
+- Features: Prevents invalid data insertion and supports actions like `ON DELETE CASCADE`, `ON UPDATE SET NULL`, etc.
+- Example: 
+  ```sql
+  FOREIGN KEY (customer_id) REFERENCES customers(id)
+  ```
+
+ 3. UNIQUE Constraint
+- Description: Ensures all values in a column (or group of columns) are distinct.
+- Features: Allows NULL values (unlike Primary Key). Multiple UNIQUE constraints can exist in one table.
+- Example: `email VARCHAR(255) UNIQUE`
+
+ 4. NOT NULL Constraint
+- Description: Ensures a column cannot have a NULL value. The column must contain some value.
+- Features: Applied at column level.
+- Example: `name VARCHAR(100) NOT NULL`
+
+ 5. CHECK Constraint *(MySQL 8.0.16 and above)*
+- Description: Allows you to specify a condition that each row must satisfy.
+- Features: Validates data based on a logical expression.
+- Example: 
+  ```sql
+  age INT CHECK (age >= 18)
+  ```
+
+ 6. DEFAULT Constraint
+- Description: Provides a default value for a column when no value is specified during INSERT.
+- Example: `status VARCHAR(20) DEFAULT 'active'`
+
+ 7. AUTO_INCREMENT Constraint
+- Description: Automatically generates a unique integer value when a new record is inserted.
+- Features: Usually used with Primary Key. Only one AUTO_INCREMENT column per table.
+- Example: `id INT AUTO_INCREMENT PRIMARY KEY
+
+Additional Notes:
+- Constraints can be defined at column level or table level.
+- You can name constraints using `CONSTRAINT constraint_name`.
+- You can add/remove constraints using `ALTER TABLE` statements.
+
+How to Create table in database?
+Syntax 
+   create table <tablename> (
+      field-name datatype(size) constraint,
+      field-name datatype(size) constraint,
+      field-name datatype(size) constraint,
+      field-name datatype(size) constraint,
+      field-name datatype(size) constraint,
+   )
+
+Example
+----------
+create table teacher (
+    id int PRIMARY KEY AUTO_INCREMENT, 
+    fullname VARCHAR(128) NOT NULL, 
+    gender VARCHAR(6) NOT NULL, 
+    dob date not null, 
+    email varchar(128) unique not null, 
+    mobile varchar(10) unique not null, 
+    weight float CHECK (weight>0),
+    height float, 
+    photo varchar(128)
+)
+
+How to Insert row into table?
+-----------------------------
+to insert a row in table, one have to use insert command. there are 2 version of it. 
+1st version 
+insert into <tablename> values (<value-1>,<value-2>,....<value-N>)
+Example 
+insert into teacher values (0,'ram patel','male','1985-07-12','theeasylearn@gmail.com','1234567890',75.50,5.7,'photo.jpg')
+
+
+INSERT INTO teacher 
+(id, fullname, gender, dob, email, mobile, weight, height, photo)
+VALUES
+
+INSERT INTO teacher (id,fullname,gender,dob,email,mobile,weight,height,photo) VALUES
+(0,'Aarav Sharma','Male','2001-01-15','aarav1@gmail.com','9876543201',68.5,5.8,'photo.jpg'),
+(0,'Vivaan Patel','Male','2000-03-12','vivaan2@gmail.com','9876543202',70.2,5.9,'photo.jpg'),
+(0,'Aditya Verma','Male','2002-05-18','aditya3@gmail.com','9876543203',72.4,5.7,'photo.jpg'),
+(0,'Krishna Mehta','Male','2001-07-22','krishna4@gmail.com','9876543204',66.8,5.6,'photo.jpg'),
+(0,'Arjun Singh','Male','2000-09-14','arjun5@gmail.com','9876543205',74.1,6.0,'photo.jpg'),
+(0,'Rohan Desai','Male','2001-11-10','rohan6@gmail.com','9876543206',69.3,5.8,'photo.jpg'),
+(0,'Dhruv Joshi','Male','2002-02-25','dhruv7@gmail.com','9876543207',71.6,5.9,'photo.jpg'),
+(0,'Yash Shah','Male','2001-04-16','yash8@gmail.com','9876543208',67.7,5.7,'photo.jpg'),
+(0,'Kunal Nair','Male','2000-06-30','kunal9@gmail.com','9876543209',73.9,5.10,'photo.jpg'),
+(0,'Raj Malhotra','Male','2001-08-19','raj10@gmail.com','9876543210',75.5,6.1,'photo.jpg'),
+(0,'Harsh Trivedi','Male','2002-10-11','harsh11@gmail.com','9876543211',64.3,5.6,'photo.jpg'),
+(0,'Manav Kapoor','Male','2000-12-01','manav12@gmail.com','9876543212',70.8,5.9,'photo.jpg'),
+(0,'Sahil Rao','Male','2001-01-27','sahil13@gmail.com','9876543213',68.1,5.8,'photo.jpg'),
+(0,'Nikhil Iyer','Male','2002-03-15','nikhil14@gmail.com','9876543214',72.7,5.10,'photo.jpg'),
+(0,'Parth Bhatt','Male','2000-05-20','parth15@gmail.com','9876543215',69.9,5.7,'photo.jpg'),
+(0,'Rahul Mishra','Male','2001-07-07','rahul16@gmail.com','9876543216',76.2,6.0,'photo.jpg'),
+(0,'Tushar Jain','Male','2002-09-09','tushar17@gmail.com','9876543217',65.4,5.6,'photo.jpg'),
+(0,'Vikas Choudhary','Male','2000-11-18','vikas18@gmail.com','9876543218',74.8,5.11,'photo.jpg'),
+(0,'Ankit Saxena','Male','2001-02-21','ankit19@gmail.com','9876543219',71.5,5.8,'photo.jpg'),
+(0,'Mohit Gupta','Male','2002-04-13','mohit20@gmail.com','9876543220',67.9,5.7,'photo.jpg'),
+(0,'Ritesh Yadav','Male','2000-06-26','ritesh21@gmail.com','9876543221',73.4,5.9,'photo.jpg'),
+(0,'Deepak Roy','Male','2001-08-05','deepak22@gmail.com','9876543222',70.6,5.8,'photo.jpg'),
+(0,'Akash Pandey','Male','2002-10-29','akash23@gmail.com','9876543223',66.2,5.7,'photo.jpg'),
+(0,'Sameer Kulkarni','Male','2000-12-24','sameer24@gmail.com','9876543224',75.1,6.0,'photo.jpg'),
+(0,'Jay Patel','Male','2001-03-08','jay25@gmail.com','9876543225',68.7,5.8,'photo.jpg'),
+(0,'Ananya Sharma','Female','2001-01-11','ananya1@gmail.com','9876543226',52.4,5.4,'photo.jpg'),
+(0,'Priya Patel','Female','2000-03-09','priya2@gmail.com','9876543227',55.2,5.5,'photo.jpg'),
+(0,'Sneha Verma','Female','2002-05-17','sneha3@gmail.com','9876543228',50.8,5.3,'photo.jpg'),
+(0,'Riya Mehta','Female','2001-07-21','riya4@gmail.com','9876543229',54.1,5.4,'photo.jpg'),
+(0,'Kavya Singh','Female','2000-09-13','kavya5@gmail.com','9876543230',56.7,5.6,'photo.jpg'),
+(0,'Pooja Desai','Female','2001-11-02','pooja6@gmail.com','9876543231',53.5,5.5,'photo.jpg'),
+(0,'Neha Joshi','Female','2002-02-18','neha7@gmail.com','9876543232',51.9,5.3,'photo.jpg'),
+(0,'Isha Shah','Female','2001-04-25','isha8@gmail.com','9876543233',55.6,5.4,'photo.jpg'),
+(0,'Diya Nair','Female','2000-06-28','diya9@gmail.com','9876543234',52.3,5.5,'photo.jpg'),
+(0,'Aditi Malhotra','Female','2001-08-16','aditi10@gmail.com','9876543235',57.2,5.6,'photo.jpg'),
+(0,'Meera Trivedi','Female','2002-10-08','meera11@gmail.com','9876543236',50.7,5.3,'photo.jpg'),
+(0,'Simran Kapoor','Female','2000-12-04','simran12@gmail.com','9876543237',54.6,5.4,'photo.jpg'),
+(0,'Tanvi Rao','Female','2001-01-30','tanvi13@gmail.com','9876543238',53.8,5.5,'photo.jpg'),
+(0,'Nidhi Iyer','Female','2002-03-14','nidhi14@gmail.com','9876543239',55.1,5.6,'photo.jpg'),
+(0,'Bhavna Bhatt','Female','2000-05-22','bhavna15@gmail.com','9876543240',52.9,5.4,'photo.jpg'),
+(0,'Komal Mishra','Female','2001-07-06','komal16@gmail.com','9876543241',56.4,5.5,'photo.jpg'),
+(0,'Shreya Jain','Female','2002-09-10','shreya17@gmail.com','9876543242',51.2,5.3,'photo.jpg'),
+(0,'Payal Choudhary','Female','2000-11-20','payal18@gmail.com','9876543243',54.7,5.4,'photo.jpg'),
+(0,'Muskan Saxena','Female','2001-02-19','muskan19@gmail.com','9876543244',53.6,5.5,'photo.jpg'),
+(0,'Reema Gupta','Female','2002-04-12','reema20@gmail.com','9876543245',55.8,5.6,'photo.jpg'),
+(0,'Sakshi Yadav','Female','2000-06-24','sakshi21@gmail.com','9876543246',52.1,5.4,'photo.jpg'),
+(0,'Divya Roy','Female','2001-08-03','divya22@gmail.com','9876543247',56.5,5.5,'photo.jpg'),
+(0,'Khushi Pandey','Female','2002-10-27','khushi23@gmail.com','9876543248',50.9,5.3,'photo.jpg'),
+(0,'Palak Kulkarni','Female','2000-12-22','palak24@gmail.com','9876543249',54.2,5.4,'photo.jpg'),
+(0,'Jiya Patel','Female','2001-03-06','jiya25@gmail.com','9876543250',53.7,5.5,'photo.jpg');
+```
+
+
+2nd method 
+------------
+syntax 
+insert into <tablename> (<fieldnames>) values (<value-1>)
+
+Note : 
+no of fields and no of values must be equal 
+we can skip some fields while inserting rows 
+
+Example
+insert into teacher (fullname,gender,dob,email,mobile) values ('mohan sharma','male','2000-12-05','mohan.sharma@gmail.com','1478523690')
+
+How to delete row from table?
+-----------------------------
+to delete row from table, one has to use delete command 
+
+syntax 
+delete from <tablename> [condition/relational expression]
+
+to delete all rows 
+delete from teacher
+
+to delete specific row
+delete teacher whose id is 53
+delete from teacher where id = 53
+delete teacher whose name is vikram singh
+delete from teacher where fullname='vikram SINGH'
+
+delete teacher whose whose weight is above 80 kg 
+delete from teacher where weight>80.0
+
+delete teacher whose whose height is below 5.3 inch
+delete from teacher where height<5.3
+
+
+how to empty table? 
+to empty table (delete all rows), truncate table command 
+truncate table <tablename>
+example 
+truncate table teacher
+
+when we truncate table, primary key will reset to zero 
+
+how to delete table?
+delete table means delete both data and table structure. for this we use 
+drop table <tablename> command 
+drop table teacher 
+
+----------------------------------------------------------------------------
+how to update existing rows in table? 
+to update/change values in existing table, we use update table command 
+
+syntax 
+UPDATE <table_name> SET column1 = value1, column2 = value2, ... [WHERE condition/relational expression];
+
+Example 
+update teacher table, increase height of all teacher by 1 feet 
+update teacher set height=height+1 
+
+Note :- if we dont use where clause in update or delete command, then mysql update/delete all rows
+
+update teacher table, change weight to 100 kg of teacher rahul sharma 
+update teacher set weight=100 where fullname='rahul sharma'
+
+update teacher table, set name to "monika sharma", gender to female of teacher whose id is 1 
+update teacher set fullname='monika sharma', gender='female' where id=1
+
+-------------------------------------------------------------------------
+how to fetch/read data from table?
+to fetch data from table, we use select SQL command 
+
+syntax 
+SELECT *|column_name1, column_name2, ...
+FROM table_name [WHERE condition] [ORDER BY column_name] [group by column_name ] 
+[having column_name] [LIMIT number_of_rows];
+
+fetch all rows and all column from table 
+fetch all teachers's table fields and rows 
+
+----------------------------------------------------------
+select * from teacher 
+
+fetch only selected fields & all rows 
+----------------------------------------------
+fetch id, fullname and mobile 
+select id,fullname,mobile from teacher 
+
+fetch id,height,weight,gender from teacher 
+select id,height,weight,gender from teacher 
+
+fetch data in some specific sequence (change order of row)
+----------------------------------------------
+fetch teacher's detail (all fields) name wise in ascending order 
+select * from teacher order by fullname asc 
+OR 
+select * from teacher order by fullname 
+
+fetch teacher's detail (all fields) weight wise in descending order 
+select * from teacher order by weight desc 
+
+we can use more then one fields with order by clause 
+fetch teacher's detail (all fields) height wise and weight wise in  order
+select * from teacher order by height, weight 
+
+Limit no of rows fetched from table.
+----------------------------------------------
+fetch 1st 10 teacher's details
+select * from teacher limit 0,10
+
+fetch next 10 teacher's details
+select * from teacher limit 10,10
+
+fetch next 10 teacher's details
+select * from teacher limit 20,10
+
+use Limit & order by together 
+----------------------------------------------
+fetch 10 youngest teacher's detail 
+select * from teacher order by dob desc limit 0,10
+
+fetch id, name, height of 10 tallest teacher
+select id,fullname,height from teacher order by height desc limit 0,10
+
+fetch id, name, weight of 10 least weight teacher
+select id,fullname, weight from teacher order by weight limit 0,10
+
+find most heaviest teacher and display detail 
+select * from teacher order by weight desc limit 0,1
+fetch records from table as per condition (filter records)
+to fetch records/rows from tables, as per condition we use where clause. 
+---------------------------------------------------------------
+
+fetch only male teacher's id,name,email,gender  
+select id,fullname,email,gender from teacher where gender='male'
+
+fetch only  teacher's id,name,email,gender,height whose height is above 5.7 inch 
+select id,fullname,email,gender,height from teacher where height>5.7
+
+fetch only  teacher's id,name,email,gender,height whose height in range of 6 to 6.5 inch 
+select id,fullname,email,gender,height from teacher where height>=6 and height<=6.5
+
+or
+select id,fullname,email,gender,height from teacher where height between 6.0 and 6.5;
+
+fetch only  teacher's id,name,email,gender,height whose id is 1 or 3 or 5 or 7 
+select id,fullname,email,gender,height from teacher where id=1 or id=3 or id=5 or id=7
+OR 
+select id,fullname,email,gender,height from teacher where id in (1,3,5,7)
+
+fetch only  teacher's id,name,email,gender,height whose id is not 1 or 3 or 5 or 7 
+select id,fullname,email,gender,height from teacher where id!=1 and id!=3 and id!=5 and id!=7
+
+or 
+select id,fullname,email,gender,height from teacher where id not in(1,3,5,7)
+
+fetch teacher id,fullname,height and weight of those teacher whose height is above 6 feet and weight is below 90 kg. 
+select id,fullname,height,weight from teacher where height>6 and weight<90
+
+fetch teacher's id,fullname,dob from teacher of those teacher whose dob is above 1984 and below 1991 and display dob wise in ascending order 
+
+select id,fullname,dob from teacher where dob>='1985-01-01' and dob<='1990-12-31' order by dob 
+
+select id,fullname,date_format(dob,'%d-%m-%Y') from teacher where dob>='1985-01-01' and dob<='1990-12-31' order by dob;
+
+
+use company database 
+--------------------------------------------------------------------------------
+
+fetch customer's detail of those customers whose name has wheels anywhere 
+select * from customers where customerName like '%Wheels%'
+
+fetch customer's detail of those customers whose name has wheels at starting 
+select * from customers where customerName like 'Wheels%'
+
+fetch customer's detail of those customers whose name has wheels at ending 
+select * from customers where customerName like '%Wheels'
+
+fetch payment details received in 2004, display date wise 
+select * from payments where paymentdate>='2004-01-01' and paymentdate<='2004-12-31' order by paymentdate limit 0,1000
+
+display date in indian format in above sql statement 
+select customerNumber,checkNumber,date_format(paymentdate,'%d-%m-%Y') as payment_date,amount from payments where paymentdate>='2004-01-01' and paymentdate<='2004-12-31' order by paymentdate limit 0,1000
+
+Aggrigate functions 
+---------------------------------------
+1. COUNT()
+Counts the number of rows.
+Syntax
+SELECT COUNT(column_name) FROM table_name;
+
+Example 
+count how many payments received 
+select count(*) from payments 
+
+count how many customers 
+select count(*) from customers
+
+count how many orders 
+select count(*) as total_orders from orders 
+
+Example
+
+SELECT COUNT(*) AS total_employees
+FROM employees;
+
+2. SUM()
+Calculates the total of numeric value (sum) of given numeric field.
+Syntax
+SELECT SUM(column_name) FROM table_name;
+
+
+Example
+find & display total payment received so far 
+select sum(amount) as total_payment from payments 
+
+findout & display total order amount 
+select sum(priceEach * quantityOrdered) as total_order_amount from orderdetails 
+
+3. AVG()
+Calculates the average value of numeric field .
+Syntax
+SELECT AVG(column_name) FROM table_name;
+
+Example
+findout & display average order amount 
+select avg(priceEach * quantityOrdered) as average_order from orderdetails
+findout & display payment amount 
+select avg(amount) as average_payment from payments 
+select round(avg(amount),2) as average_payment from payments 
+
+4. MIN()
+Returns the smallest value of numeric field .
+Syntax
+SELECT MIN(column_name) FROM table_name;
+Example
+findout & display minimum payment amount 
+select min(amount) as minimum_amount from payments 
+
+findout & display minimum order amount 
+select min(priceEach * quantityOrdered) as minimum_order from orderdetails
+
+5. MAX()
+Returns the largest value of numeric field .
+Syntax
+SELECT MAX(column_name) FROM table_name;
+
+Example
+findout and display largest payment amount 
+select max(amount) as maximum_amount from payments 
+
+findout & display maximum order amount 
+select max(priceEach * quantityOrdered) as maximum_order  from orderdetails
+
+
+Aggrigate functions with where clause
+---------------------------------------
+findout & display customerNumber and total payment amount of customerNumber 112
+select sum(amount) from payments where customerNumber=112
+
+findout & display count of customers of usa (how many customers from usa)
+select count(*) from customers where country='usa'
+
+findout & display minimum, maximum, average payment made by customerNumber 114
+select min(amount), max(amount), avg(amount) from payments where customerNumber=114
+
+findout & display minimum, maximum, average,total  payment in year 2004
+select min(amount), max(amount), avg(amount), sum(amount) from payments where 
+paymentdate>='2004-01-01' and paymentdate<='2004-12-31'
+
+
+Group by : -
+---------------------------------------
+The GROUP BY clause in MySQL is used to group rows that have the same values in one or more columns. It is commonly used with aggregate functions such as COUNT(), SUM(), AVG(), MAX(), and MIN().
+
+Examples 
+-----------------------
+display customer wise total payment amount 
+select customerNumber,sum(amount) from payments group by customerNumber
+
+display year wise total payment amount 
+select left(paymentdate,4) as year ,sum(amount) as 'total_payment' from payments group by left(paymentdate,4)
+
+display count of orders & customerNumber received by each customers.
+select customerNumber,count(*) from orders group by customerNumber
+
+display count of orders  & customerNumber received by each customers. display customer with maximum orders first 
+select customerNumber,count(*) from orders group by customerNumber order by count(*) desc 
+
+display count of items in each order 
+select orderNumber,count(*) from orderdetails group by orderNumber
+
+display each orders amount in descending order of amount 
+select orderNumber, sum(priceEach * quantityOrdered) as order_amount from orderdetails group by orderNumber order by order_amount desc
+
+display product code wise total sales amount 
+select productCode,sum(priceEach * quantityOrdered) as total_sales from orderdetails group by productCode 
+
+Having Caluse : -
+----------------------------------
+The HAVING clause in MySQL is used to filter grouped data. It works with the GROUP BY clause and is typically used with aggregate functions like COUNT(), SUM(), AVG(), MAX(), and MIN().
+
+example 
+display customer wise total payment amount of those customers who have paid more then 500000
+
+select customerNumber,sum(amount) from payments group by customerNumber having sum(amount)>500000
+
+display count of orders & customerNumber received by each customers of those customer who have given more then 5 orders .
+select customerNumber,count(*) from orders group by customerNumber having count(*)>5
+
