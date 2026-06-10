@@ -260,8 +260,59 @@ FROM teacher
 GROUP BY gender
 HAVING SUM(weight) > 1000
 
+----------------------------------------------
+Join
+------------------------
+1. List all customers along with their sales representative's first name and last name (equi join on `salesRepEmployeeNumber`).
+
+SELECT c.customerName, e.firstName,  e.lastName FROM customers c,employees e WHERE c.salesRepEmployeeNumber = e.employeeNumber;
 
 
+2. Find all orders placed by customers from 'USA'. Show `orderNumber`, `customerName`, and `orderDate`.
+
+SELECT o.orderNumber, c.customerName, o.orderDate FROM orders o, customers c WHERE o.customerNumber = c.customerNumber AND c.country = 'USA'ORDER BY  o.orderNumber;
+
+3. Display product details (`productName`, `productLine`) along with the product line's text description.
+
+Select p.productName, p.productLine,  pl.textDescription FROM  products p, productlines pl WHERE  p.productLine = pl.productLine;
+
+ 4. Show all employees and their office city and country.
+
+SELECT e.firstName, e.lastName, f.city, f.country FROM employees e, offices f WHERE  e.officeCode = f.officeCode;
 
 
+5. List all payments with the corresponding customer name and amount.
 
+SELECT c.customerName, p.checkNumber,p.amount FROM customers c, payments p WHERE c.customerNumber = p.customerNumber;
+
+6. Find all order details (`orderNumber`, `productCode`, `quantityOrdered`) with the product name.
+
+select d.ordernumber, d.productCode, d.quantityordered,p.productname from orderdetails d, products p where d.productcode = p.productcode
+
+7. Show customers from 'France' and their sales rep's job title.
+
+SELECT  c.customerName, c.country, e.jobTitle  FROM customers c,  employees e WHERE c.salesRepEmployeeNumber = e.employeeNumber AND c.country = 'France';
+
+8. Display all products in the 'Classic Cars' product line with their buy price and MSRP.
+
+   SELECT p.productName,p.productLine, p.buyPrice, p.MSRP FROM products p, productlines pl WHERE p.productLine = pl.productLine 
+    AND p.productLine = 'Classic Cars';
+
+9. List employees who report to 'Diane Murphy' (use equi join on `reportsTo`).  
+
+
+SELECT employees.firstName, employees.lastName, employees.jobTitle FROM employees, employees managers WHERE employees.reportsTo = managers.employeeNumber AND managers.firstName = 'Diane' AND managers.lastName = 'Murphy';
+
+10. Show all orders that are 'Shipped' along with the customer name.
+
+SELECT 
+    orders.orderNumber, 
+    orders.status, 
+    orders.shippedDate, 
+    customers.customerName
+FROM 
+    orders, 
+    customers
+WHERE 
+    orders.customerNumber = customers.customerNumber 
+    AND orders.status = 'Shipped';
