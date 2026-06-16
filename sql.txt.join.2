@@ -1,0 +1,445 @@
+create table student (
+    id int PRIMARY KEY AUTO_INCREMENT, 
+    fullname VARCHAR(128) NOT NULL, 
+    gender VARCHAR(6) NOT NULL, 
+    dob date not null, 
+    email varchar(128) unique not null, 
+    mobile varchar(10) unique not null,) 
+------------------------------------------------------
+create table employee(empid int primary key AUTO_INCREMENT,
+   empname varchar(128) NOT NULL,
+   salary FLOAT check (salary > 10000),
+   department VARCHAR(50), 
+   joining_date DATE)  
+------------------------------------------------------------
+create a table named product with:
+
+create table product(
+      productid INT PRIMARY KEY AUTO_INCREMENT,
+      productname VARCHAR(128) NOT NULL,
+      price float check (price > 0),
+      stock INT,
+      status VARCHAR(50) default 'Available')
+-------------------------------------------------------------------
+create a table named 'course' with
+
+create table course(
+   courseid INT PRIMARY KEY AUTO_INCREMENT,
+   coursename VARCHAR(128) NOT NULL,
+   fees FLOAT,
+   duration varchar(50)
+)
+
+19. Increase the height of all teachers by 1 foot.
+update teacher set height=height+1
+
+20. Increase the weight of all teachers by 5 kg.
+update teacher set weight = weight+5
+
+21. Change the weight of Rahul Sharma to 100 kg.
+update teacher set weight=100 where fullname='rahul sharma'
+
+22. Change the gender of teacher id 5 to female.
+update teacher set fullname='monika sharma', gender='female' where id=5
+
+23. Update the email address of Vikram Singh.
+UPDATE teacher SET email = 'visingh@gmail.com' WHERE email = 'vivaan2@gmail.com';
+
+24. Increase the height of all female teachers by 0.5 feet.
+UPDATE teacher 
+SET height = height + 0.5 
+WHERE gender = 'Female'
+
+25. Set the photo field to "default.jpg" for all teachers.
+UPDATE teacher 
+SET photo = 'default.jpg' 
+WHERE photo = 'photo.jpg'
+
+26. Change the mobile number of teacher id 25.
+update teacher set mobile=12345678 where id=25
+
+-------------------------------------------------
+
+27. Display all teacher records.
+select * from teacher 
+
+
+28. Display only fullname and email.
+select fullname, email from teacher 
+
+
+29. Display fullname, mobile, and weight.
+select fullname, mobile, weight from teacher
+
+
+30. Display all teachers sorted by fullname.
+
+select * from teacher order by fullname asc 
+OR 
+select * from teacher order by fullname 
+
+
+
+31. Display all teachers sorted by weight.
+select * from teacher order by weight
+
+
+
+32. Display only first 10 teacher records.
+
+select * from teacher limit 0,10
+
+
+33. Display the first 5 teachers sorted by date of birth.
+select * from teacher order by dob asc limit 0,5
+
+----------------------------------------------------
+## Part 6: WHERE Clause Exercises
+
+34. Display all male teachers.
+select id,fullname,email,gender from teacher where gender='male'
+
+35. Display all female teachers.
+select id,fullname,email,gender from teacher where gender='female'
+
+36. Display teachers whose weight is above 80 kg.
+select id,fullname,email,gender,weight from teacher where weight>80
+
+37. Display teachers whose weight is below 60 kg.
+select id,fullname,email,gender,weight from teacher where weight<60
+
+38. Display teachers whose height is greater than 5.8 feet.
+select id,fullname,email,gender,height from teacher where height>5.8
+
+39. Display teachers born after 2000.
+select id,fullname,dob from teacher where dob>'2000-12-31' order by dob 
+
+40. Display teachers born before 2001.
+select id,fullname,dob from teacher where dob<'2001-12-31' order by dob 
+
+
+41. Display teachers whose name is Rahul Sharma.
+SELECT * 
+FROM teacher 
+WHERE fullname = 'aditya verma'
+
+
+42. Display teachers whose email contains "gmail.com".
+SELECT * 
+FROM teacher 
+WHERE email LIKE '%gmail.com%'
+
+43. Display teachers whose weight is between 70 and 80.
+SELECT * 
+FROM teacher 
+WHERE weight BETWEEN 70 AND 80
+
+44. Display teachers whose height is between 5.4 and 5.8.
+SELECT * 
+FROM teacher 
+WHERE height BETWEEN 7.1 AND 8.8;
+---
+
+## Part 7: ORDER BY Exercises
+
+45. Display teachers sorted by fullname ascending.
+select * from teacher order by fullname asc 
+
+46. Display teachers sorted by fullname descending.
+select * from teacher order by fullname desc 
+
+47. Display teachers sorted by weight ascending.
+select * from teacher order by weight asc
+
+48. Display teachers sorted by weight descending.
+select * from teacher order by weight desc
+
+49. Display teachers sorted by date of birth.
+select * from teacher order by dob asc
+
+50. Display teachers sorted by gender and fullname.
+select * from teacher order by gender and fullname asc
+
+---
+
+## Part 8: Aggregate Function Exercises
+
+51. Count total teachers.
+select count(*) from teacher
+
+
+
+52. Count total male teachers.
+select count(*) from teacher where gender='male'
+
+53. Count total female teachers.
+select count(*) from teacher where gender='female'
+
+54. Find maximum weight.
+select max(weight) from teacher
+
+55. Find minimum weight.
+select min(weight) from teacher
+
+56. Find average weight.
+select avg(weight) from teacher
+
+
+57. Find total weight of all teachers.
+select sum(weight) from teacher
+
+58. Find maximum height.
+select max(height) from teacher
+
+59. Find minimum height.
+ select max(height) from teacher
+
+
+60. Find average height.
+ select max(height) from teacher
+
+----------------------------
+ ## Part 9: GROUP BY Exercises
+
+61. Count teachers by gender.
+SELECT gender, COUNT(*) 
+FROM teacher 
+GROUP BY gender
+
+62. Find average weight by gender.
+SELECT gender, avg(weight) 
+FROM teacher 
+GROUP BY gender
+
+63. Find maximum weight by gender.
+SELECT gender, max(weight) 
+FROM teacher 
+GROUP BY gender
+
+64. Find minimum weight by gender.
+SELECT gender, min(weight) 
+FROM teacher 
+GROUP BY gender
+
+65. Count teachers born in each year.
+SELECT YEAR(dob) AS birth_year, COUNT(*) 
+FROM teacher 
+GROUP BY YEAR(dob)
+
+66. Count teachers having Gmail accounts grouped by gender.
+SELECT email, COUNT(*) 
+FROM teacher 
+GROUP BY gender 
+LIMIT 0, 50
+---
+
+## Part 10: HAVING Clause Exercises
+
+67. Display gender groups having more than 20 teachers.
+SELECT gender, COUNT(*) AS total_teachers
+FROM teacher 
+GROUP BY gender 
+HAVING COUNT(*) > 20
+
+68. Display birth years having more than 3 teachers.
+SELECT dob, COUNT(*) AS total_teachers
+FROM teacher 
+GROUP BY dob 
+HAVING COUNT(*) > 3
+
+69. Display gender groups whose average weight exceeds 70 kg.
+SELECT gender, AVG(weight) AS average_weight
+FROM teacher
+GROUP BY gender
+HAVING AVG(weight) > 70
+
+
+70. Display groups where total weight exceeds 1000 kg.
+SELECT gender, SUM(weight) AS total_weight
+FROM teacher
+GROUP BY gender
+HAVING SUM(weight) > 1000
+
+----------------------------------------------
+Join
+------------------------
+1. List all customers along with their sales representative's first name and last name (equi join on `salesRepEmployeeNumber`).
+
+SELECT c.customerName, e.firstName,  e.lastName FROM customers c,employees e WHERE c.salesRepEmployeeNumber = e.employeeNumber;
+
+
+2. Find all orders placed by customers from 'USA'. Show `orderNumber`, `customerName`, and `orderDate`.
+
+SELECT o.orderNumber, c.customerName, o.orderDate FROM orders o, customers c WHERE o.customerNumber = c.customerNumber AND c.country = 'USA'ORDER BY  o.orderNumber;
+
+3. Display product details (`productName`, `productLine`) along with the product line's text description.
+
+Select p.productName, p.productLine,  pl.textDescription FROM  products p, productlines pl WHERE  p.productLine = pl.productLine;
+
+ 4. Show all employees and their office city and country.
+
+SELECT e.firstName, e.lastName, f.city, f.country FROM employees e, offices f WHERE  e.officeCode = f.officeCode;
+
+
+5. List all payments with the corresponding customer name and amount.
+
+SELECT c.customerName, p.checkNumber,p.amount FROM customers c, payments p WHERE c.customerNumber = p.customerNumber;
+
+6. Find all order details (`orderNumber`, `productCode`, `quantityOrdered`) with the product name.
+
+select d.ordernumber, d.productCode, d.quantityordered,p.productname from orderdetails d, products p where d.productcode = p.productcode
+
+7. Show customers from 'France' and their sales rep's job title.
+
+SELECT  c.customerName, c.country, e.jobTitle  FROM customers c,  employees e WHERE c.salesRepEmployeeNumber = e.employeeNumber AND c.country = 'France';
+
+8. Display all products in the 'Classic Cars' product line with their buy price and MSRP.
+
+   SELECT p.productName,p.productLine, p.buyPrice, p.MSRP FROM products p, productlines pl WHERE p.productLine = pl.productLine 
+    AND p.productLine = 'Classic Cars';
+
+9. List employees who report to 'Diane Murphy' (use equi join on `reportsTo`).  
+
+
+SELECT employees.firstName, employees.lastName, employees.jobTitle FROM employees, employees managers WHERE employees.reportsTo = managers.employeeNumber AND managers.firstName = 'Diane' AND managers.lastName = 'Murphy';
+
+10. Show all orders that are 'Shipped' along with the customer name.
+
+SELECT 
+    orders.orderNumber, 
+    orders.status, 
+    orders.shippedDate, 
+    customers.customerName
+FROM 
+    orders, 
+    customers
+WHERE 
+    orders.customerNumber = customers.customerNumber 
+    AND orders.status = 'Shipped';
+    
+11. List all customers and their sales representative's name (use LEFT JOIN). Include customers who have no sales rep.
+SELECT  c.customerNumber, c.customerName, e.firstName AS repFirstName, e.lastName AS repLastName FROM customers c 
+LEFT JOIN employees e ON c.salesRepEmployeeNumber = e.employeeNumber;
+
+SELECT  e.employeeNumber, e.lastName, e.firstName, c.customerNumber, c.customerName FROM employees e LEFT JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+
+13. List all products and how many times they have been ordered (use LEFT JOIN with `orderdetails`). 
+
+SELECT p.productCode,  p.productName,  p.productLine,COUNT(od.orderNumber) AS timesOrdered FROM products p LEFT JOIN orderdetails od ON p.productCode = od.productCode GROUP BY p.productCode, p.productName, p.productLine;
+
+14. Show all offices and the number of employees in each office (use LEFT JOIN).
+
+SELECT  o.officeCode,  o.city,  o.country, e.employeeNumber, e.firstName, e.lastName FROM offices o LEFT JOIN employees e ON o.officeCode = e.officeCode;
+
+15. Display all customers and their total payment amount (use LEFT JOIN with `payments`).
+
+select c.customernumber,c.customername, p.amount from customers c left join payments p  on c.customernumber = p.customernumber
+
+
+16. Use RIGHT JOIN to show all employees and any customers they represent.
+SELECT  e.employeeNumber, e.lastName,  e.firstName,  e.officeCode,  c.customerNumber, c.customerName FROM customers c 
+RIGHT JOIN employees e ON c.salesRepEmployeeNumber = e.employeeNumber;
+
+17. Use LEFT JOIN to list all product lines and the products in them.
+
+select p.productcode, p. productname, pl.productline from productlines pl left join products p on pl.productline = p. productline
+
+18. Show all orders and the customer name, including orders without a matching customer (if any).
+
+select o.ordernumber, o.customernumber, c.customername from orders o left join customers c on o.customernumber = c.customernumber 
+
+19. Find the total number of orders per customer. Show `customerName` and order count.
+
+SELECT  c.customerNumber,c.customerName, COUNT(o.orderNumber) AS totalOrders FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber GROUP BY c.customerNumber, c.customerName;
+
+20. Calculate total sales amount (sum of `priceEach * quantityOrdered`) per product line.
+
+SELECT  p.productLine,SUM(od.priceEach * od.quantityOrdered) AS totalSalesAmount FROM orderdetails od LEFT JOIN products p ON od.productCode = p.productCode GROUP BY p.productLine;
+
+21. Find the average credit limit of customers by country.
+select country,avg(creditlimit) as averagecreditlimit from customers group by country order by creditlimit
+
+
+22. Show the number of employees per office city.
+SELECT o.city, COUNT(e.employeeNumber) AS numberOfEmployees FROM offices o LEFT JOIN employees e ON o.officeCode = e.officeCode
+GROUP BY o.city ORDER BY numberOfEmployees 
+
+23. Find the total payment amount received from each customer.
+select c.customernumber, c. customername, p.amount from customers c left join payments p on c.customernumber = p.customernumber 
+
+24. Count how many products are in each product line.
+SELECT p.productCode,p.productName,pl.productLine FROM products p LEFT JOIN productlines pl ON p.productLine = pl.productLine;
+
+25. Find the total quantity ordered for each product (top 5 by quantity).
+SELECT  p.productCode,  p.productName,  SUM(od.quantityOrdered) AS totalQuantityOrdered FROM products p INNER JOIN orderdetails od ON p.productCode = od.productCode GROUP BY p.productCode, p.productName ORDER BY totalQuantityOrdered DESC LIMIT 5;
+
+26. Find customers who have placed more than 5 orders.
+SELECT c.customerNumber, c.customerName, COUNT(o.orderNumber) AS totalOrders FROM customers c INNER JOIN orders o ON c.customerNumber = o.customerNumber GROUP BY c.customerNumber, c.customerName HAVING COUNT(o.orderNumber) > 5 ORDER BY totalOrders DESC;
+
+27. Show product lines where the average MSRP is greater than 100.
+
+ SELECT  productLine,  AVG(MSRP) AS average_msrp FROM  products GROUP BY productLine HAVING  AVG(MSRP) > 100;
+
+28. Find sales reps (employees) who have managed more than 10 customers.
+
+SELECT e.employeeNumber,e.firstName, e.lastName, COUNT(c.customerNumber) AS customer_count FROM employees e INNER JOIN  customers c ON e.employeeNumber = c.salesRepEmployeeNumber GROUP BY e.employeeNumber, e.firstName, e.lastName HAVING COUNT(c.customerNumber) > 10;
+
+
+29. List countries where the total payment amount exceeds 500,000.
+SELECT  c.country,  SUM(p.amount) AS total_payment  FROM  payments p JOIN customers c ON p.customernumber = c.customernumber
+GROUP BY  c.country HAVING  total_payment > 500000 ORDER BY total_payment DESC LIMIT 0, 25;
+
+
+30. Find offices that have more than 5 employees.
+
+SELECT o.officeCode,  o.city,  COUNT(e.employeeNumber) AS total_employees FROM  offices o JOIN employees e ON o.officeCode = e.officeCode GROUP BY o.officeCode, o.city  HAVING   COUNT(e.employeeNumber) > 5;
+
+31. List customers sorted by their total payment amount (highest first).
+
+select c.customernumber, c.customername, sum(p.amount) as total_payment from customers c join payments p on c.customernumber = p.customernumber group by c.customernumber, c.customername order by total_payment desc limit 0,25
+
+32. Show product lines sorted by the number of products in them (descending).
+
+
+SELECT  p.productcode,  p.productname,  p.quantityinstock AS total_stock FROM  products p ORDER BY total_stock DESC;
+
+
+33. Display employees sorted by the number of customers they manage.
+
+SELECT e.employeeNumber, e.firstName,  e.lastName,  COUNT(c.customerNumber) AS customer_count FROM employees e INNER JOIN  
+customers c ON e.employeeNumber = c.salesRepEmployeeNumber GROUP BY e.employeeNumber, e.firstName, e.lastName ORDER by customer_count DESC;
+
+34. List countries with their total credit limit (sorted descending).
+
+select c.country, sum(c.creditlimit) as total_creditlimit from customers c group by c.country order by total_creditlimit desc
+
+35. Show the top 10 most ordered products by total quantity
+
+select od.productcode, sum(od.quantityordered) as total_quantity_ordered from orderdetails od group by od.productcode order by 
+total_quantity_ordered desc limit 10
+
+36. Show the top 5 customers by credit limit.
+
+select c.customername, c.creditlimit from customers c group by c.customername order by c.creditlimit limit 5 
+
+37. List the 10 most expensive products (by MSRP).
+
+select p.productname, p.msrp from products p group by p.productname order by p.msrp desc limit 10
+
+38. Show the 5 offices with the most employees.
+
+SELECT o.officeCode,  o.city,  o.country, COUNT(e.employeeNumber) AS total_employees FROM offices o JOIN  employees e ON o.officeCode = e.officeCode GROUP BY  o.officeCode,  o.city, o.country ORDER BY  total_employees DESC LIMIT 5;
+
+39. Display the 10 largest orders by total value (`priceEach * quantityOrdered`).
+
+select o.ordernumber, sum(o.priceeach * o.quantityordered) as total_value from orderdetails o group by o.ordernumber order by 
+total_value desc limit 10
+
+
+40. Find the 5 customers with the highest total payments.
+
+select c.customernumber, c. customername, sum(p.amount) as total_amount from customers c join payments p  on c.customernumber = p.customernumber group by c.customernumber,c.customername order by total_amount desc limit 5
+
+41. For each sales rep, show the total sales amount they generated (join `employees` → `customers` → `orders` → `orderdetails`). Sort by total sales descending.
+
+

@@ -47,4 +47,12 @@ select * from orderdetails where productCode in ('S18_1749','S18_2248','S18_4409
 
 combine 
 select * from orderdetails where productCode in (select productCode from orderdetails where orderNumber=10100)
- 
+
+
+
+
+
+
+
+
+ select o.orderNumber,orderDate, status, productCode, priceEach , quantityOrdered  from orders o, orderdetails d where o.orderNumber=d.orderNumber order by orderdate
