@@ -1,0 +1,62 @@
+# Error Log
+# All runtime errors in 4_project.py are captured here.
+[2026-07-03 09:19:14.603535] Error: invalid literal for int() with base 10: 'abc'
+Traceback (most recent call last):
+  File "C:\code\AI_ML_DS_11\database\4_project.py", line 99, in <module>
+    report_choice = int(input("enter your choice: "))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'abc'
+==================================================[2026-07-03 10:38:11.067370] Error: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+Traceback (most recent call last):
+  File "C:\Users\AI\chandani\database\4_project.py", line 105, in <module>
+    reports.DailyReport()
+  File "C:\Users\AI\chandani\database\reports.py", line 42, in DailyReport
+    displayReport(sql)
+  File "C:\Users\AI\chandani\database\reports.py", line 11, in displayReport
+    cursor.execute(sql)
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\cursor.py", line 551, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 490, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 395, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+==================================================
+[2026-07-03 10:38:31.093399] Error: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+Traceback (most recent call last):
+  File "C:\Users\AI\chandani\database\4_project.py", line 107, in <module>
+    reports.WeeklyReport()
+  File "C:\Users\AI\chandani\database\reports.py", line 47, in WeeklyReport
+    displayReport(sql)
+  File "C:\Users\AI\chandani\database\reports.py", line 11, in displayReport
+    cursor.execute(sql)
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\cursor.py", line 551, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 490, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 395, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+==================================================
+[2026-07-03 10:50:55.010674] Error: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+Traceback (most recent call last):
+  File "C:\Users\AI\chandani\database\4_project.py", line 105, in <module>
+    reports.DailyReport()
+  File "C:\Users\AI\chandani\database\reports.py", line 42, in DailyReport
+    displayReport(sql)
+  File "C:\Users\AI\chandani\database\reports.py", line 11, in displayReport
+    cursor.execute(sql)
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\cursor.py", line 551, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 490, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AI\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection.py", line 395, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'billdate' in 'where clause'
+==================================================
