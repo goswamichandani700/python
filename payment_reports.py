@@ -1,117 +1,112 @@
 import connection as database
 
-def displayReport(sql, params=None):
+def BatchWiseLectureDetails():
+    cursor = None
+    try:
+        batchid = int(input("\nEnter Batch ID: "))
+        start_date = input("Enter Start Date (YYYY-MM-DD): ")
+        end_date = input("Enter End Date (YYYY-MM-DD): ")
+        
+        cursor = database.connect.cursor(dictionary=True)
+        
+        cursor.execute("SELECT * FROM batch WHERE id = %s AND is_deleted = 0", (batchid,))
+        batch = cursor.fetchone()
+        
+        if not batch:
+            print("\n[-] Active Batch ID not found.\n")
+            return
+            
+        batch_title = batch.get('name') or batch.get('title') or f"Batch {batchid}"
+        
+        sql = """
+            SELECT l.id, s.title AS subject_title, t.name AS teacher_name, 
+                   l.duration_in_minutes, l.lecturedate
+            FROM lecture l
+            INNER JOIN subject s ON l.subjectid = s.id
+            INNER JOIN teacher t ON l.teacherid = t.id
+            WHERE l.batchid = %s AND l.lecturedate BETWEEN %s AND %s
+            ORDER BY l.lecturedate ASC
+        """
+        cursor.execute(sql, (batchid, start_date, end_date))
+        lectures = cursor.fetchall()
+        
+        if not lectures:
+            print(f"\n[-] No lectures found for Batch '{batch_title}' between {start_date} and {end_date}.\n")
+            return
+            
+        print(f"\n=========================================================================")
+        print(f" LECTURE REPORT FOR BATCH: {batch_title} ({start_date} to {end_date})")
+        print(f"=========================================================================")
+        print(f"{'ID':<5} {'Subject Title':<22} {'Teacher Name':<20} {'Duration (Min)':<15} {'Date':<12}")
+        print("-" * 75)
+        
+        total_duration = 0
+        for row in lectures:
+            print(f"{row['id']:<5} {row['subject_title']:<22} {row['teacher_name']:<20} {row['duration_in_minutes']:<15} {str(row['lecturedate']):<12}")
+            total_duration += row['duration_in_minutes']
+            
+        print("-" * 75)
+        print(f"Total Lectures: {len(lectures)} | Total Duration: {total_duration} Minutes\n")
 
-    cursor = database.connect.cursor(dictionary=True)
-
-    if params:
-        cursor.execute(sql, params)
-    else:
-        cursor.execute(sql)
-
-    table = cursor.fetchall()
-    cursor.close()
-
-    if len(table) == 0:
-        print("\nNo Records Found")
-        return
-
-    columns = list(table[0].keys())
-
-    col_width = {}
-
-    for col in columns:
-        max_len = max(len(str(row[col])) for row in table)
-        col_width[col] = max(max_len, len(col))
-
-    print()
-
-    header = " | ".join(f"{col:<{col_width[col]}}" for col in columns)
-    print(header)
-    print("-" * len(header))
-
-    for row in table:
-        print(" | ".join(f"{str(row[col]):<{col_width[col]}}" for col in columns))
-
-    print()
-
-
-# --------------------------------------------------------
-# Month Wise Income Expense Report
-# --------------------------------------------------------
-
-def MonthWiseIncomeExpenseReport():
-
-    month = input("Enter Month (1-12): ")
-    year = input("Enter Year : ")
-
-    sql = "SELECT CASE WHEN flag=1 THEN 'Income' WHEN flag=2 THEN 'Expense' END AS Type, SUM(amount) AS Total_Amount FROM `transaction` WHERE is_deleted=0 AND MONTH(trandate)=%s AND YEAR(trandate)=%s GROUP BY flag"
-   
-
-    displayReport(sql, (month, year))
-
-
-# --------------------------------------------------------
-# Quarter Wise Income Expense Report
-# --------------------------------------------------------
-
-def QuarterWiseIncomeExpenseReport():
-
-    quarter = int(input("Enter Quarter (1-4): "))
-    year = input("Enter Year : ")
-
-    if quarter == 1:
-        start = 1
-        end = 3
-    elif quarter == 2:
-        start = 4
-        end = 6
-    elif quarter == 3:
-        start = 7
-        end = 9
-    else:
-        start = 10
-        end = 12
-
-    sql = "SELECT CASE WHEN flag=1 THEN 'Income' WHEN flag=2 THEN 'Expense' END AS Type, SUM(amount) AS Total_Amount FROM `transaction` WHERE is_deleted=0 AND MONTH(trandate) BETWEEN %s AND %s AND YEAR(trandate)=%s GROUP BY flag"
-  
-
-    displayReport(sql, (start, end, year))
+    except Exception as e:
+        print(f"\n[-] Error generating report: {e}\n")
+    finally:
+        if cursor:
+            cursor.close()
 
 
-# --------------------------------------------------------
-# Year Wise Income Expense Report
-# --------------------------------------------------------
+def BatchWiseLectureWithTotalAmount():
+    cursor = None
+    try:
+        batchid = int(input("\nEnter Batch ID: "))
+        
+        cursor = database.connect.cursor(dictionary=True)
+        
+        cursor.execute("SELECT * FROM batch WHERE id = %s AND is_deleted = 0", (batchid,))
+        batch = cursor.fetchone()
+        
+        if not batch:
+            print("\n[-] Active Batch ID not found.\n")
+            return
+            
+        batch_title = batch.get('name') or batch.get('title') or f"Batch {batchid}"
+            
+        sql = """
+            SELECT l.id, s.title AS subject_title, t.name AS teacher_name, 
+                   l.duration_in_minutes, l.amount, l.lecturedate
+            FROM lecture l
+            INNER JOIN subject s ON l.subjectid = s.id
+            INNER JOIN teacher t ON l.teacherid = t.id
+            WHERE l.batchid = %s
+            ORDER BY l.lecturedate ASC
+        """
+        cursor.execute(sql, (batchid,))
+        lectures = cursor.fetchall()
+        
+        if not lectures:
+            print(f"\n[-] No lecture records found for Batch '{batch_title}'.\n")
+            return
 
-def YearWiseIncomeExpenseReport():
+        print(f"\n===================================================================================")
+        print(f" BATCH LECTURE & FINANCIAL REPORT: {batch_title}")
+        print(f"===================================================================================")
+        print(f"{'ID':<5} {'Subject Title':<22} {'Teacher Name':<20} {'Min':<8} {'Amount':<10} {'Date':<12}")
+        print("-" * 83)
+        
+        total_amount = 0.0
+        total_duration = 0
+        
+        for row in lectures:
+            print(f"{row['id']:<5} {row['subject_title']:<22} {row['teacher_name']:<20} {row['duration_in_minutes']:<8} {row['amount']:<10.2f} {str(row['lecturedate']):<12}")
+            total_amount += float(row['amount'])
+            total_duration += row['duration_in_minutes']
+            
+        print("-" * 83)
+        print(f"{'TOTALS:':<48} {total_duration:<8} INR {total_amount:<10.2f}")
+        print(f"===================================================================================\n")
 
-    year = input("Enter Year : ")
-
-    sql = "SELECT CASE WHEN flag=1 THEN 'Income' WHEN flag=2 THEN 'Expense' END AS Type, SUM(amount) AS Total_Amount FROM `transaction` WHERE is_deleted=0 AND YEAR(trandate)=%s GROUP BY flag"
-   
-
-    displayReport(sql, (year,))
-
-
-# --------------------------------------------------------
-# Tour Wise Income Expense Report
-# --------------------------------------------------------
-
-def TourWiseIncomeExpenseReport():
-
-    tourid = input("Enter Tour ID : ")
-
-    sql = "SELECT CASE WHEN flag=1 THEN 'Income' WHEN flag=2 THEN 'Expense' END AS Type, SUM(amount) AS Total_Amount FROM `transaction` WHERE is_deleted=0 AND tourid=%s GROUP BY flag"
-    
-
-    displayReport(sql, (tourid,))
-
-
-# --------------------------------------------------------
-# All Tour Income Expense Report
-# --------------------------------------------------------
-
-def AllTourIncomeExpenseReport():
-
-    sql = "SELECT tourid, SUM(CASE WHEN flag=1 THEN amount ELSE 0 END) AS Total_Income, SUM(CASE WHEN flag=2 THEN amount ELSE 0 END) AS Total_Expense, SUM(CASE WHEN flag=1 THEN amount ELSE -amount END) AS Profit FROM `transaction` WHERE is_deleted=0 GROUP BY tourid ORDER BY tourid"
-    displayReport(sql)
+    except Exception as e:
+        print(f"\n[-] Error generating report: {e}\n")
+    finally:
+        if cursor:
+            cursor.close()

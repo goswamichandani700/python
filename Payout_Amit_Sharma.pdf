@@ -1,0 +1,16 @@
+--------------------------------------------------
+                PAYOUT INVOICE
+--------------------------------------------------
+Teacher Name : Amit Sharma
+Teacher Email: amit.sharma@gmail.com
+Period       : 2026-06-01 to 2026-06-30
+--------------------------------------------------
+Subject                   Duration(Min)   Amount
+--------------------------------------------------
+Object Oriented Python    60              600.00    
+Supervised Machine Learning 90              1200.00   
+--------------------------------------------------
+Total Duration: 150 Minutes
+Total Payout  : INR 1800.00
+--------------------------------------------------
+Status        : Generated & Saved Successfully
