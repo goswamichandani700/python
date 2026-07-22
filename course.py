@@ -29,7 +29,6 @@ def InsertCourse():
 
 
 def UpdateCourse():
-    # is_deleted=0 ઉમેર્યું છે જેથી ડિલીટ થયેલો કોર્સ અપડેટ ના થાય
     sql = "UPDATE course SET title=%s, description=%s, duration=%s, fees=%s WHERE id=%s AND is_deleted=0"
 
     try:
@@ -61,7 +60,6 @@ def UpdateCourse():
 
 
 def DeleteCourse():
-    # is_deleted=0 ઉમેર્યું છે
     sql = "UPDATE course SET is_deleted=1 WHERE id=%s AND is_deleted=0"
 
     try:

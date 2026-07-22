@@ -58,7 +58,6 @@ def UpdateSubject():
 
 
 def DeleteSubject():
-    # is_deleted=0 ઉમેર્યું છે
     sql = "UPDATE subject SET is_deleted=1 WHERE id=%s AND is_deleted=0"
 
     try:

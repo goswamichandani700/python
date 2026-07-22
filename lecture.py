@@ -11,8 +11,6 @@ def InsertLecture():
         batchid = int(input("Enter Batch ID: "))
         duration = int(input("Enter Lecture Duration (in minutes): "))
         lecturedate = input("Enter Lecture Date (YYYY-MM-DD): ")
-
-        # 1. Subject નો per_hour_rate મેળવો
         cursor.execute("SELECT per_hour_rate FROM subject WHERE id = %s AND is_deleted = 0", (subjectid,))
         subject_row = cursor.fetchone()
 
@@ -21,8 +19,6 @@ def InsertLecture():
             return
 
         per_hour_rate = subject_row['per_hour_rate']
-
-        # 2. Amount ની ગણતરી
         amount = (duration / 60) * float(per_hour_rate)
 
         sql = """

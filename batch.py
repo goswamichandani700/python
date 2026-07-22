@@ -60,7 +60,6 @@ def UpdateBatch():
 
 
 def DeleteBatch():
-    # is_deleted=0 ચેક કરવું જરૂરી છે
     sql = "UPDATE batch SET is_deleted=1 WHERE id=%s AND is_deleted=0"
 
     try:

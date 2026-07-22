@@ -96,8 +96,6 @@ def SendPayoutEmail(payout_data):
                 print("[-] Invalid input! Please enter a number (1, 2, or 3).")
                 
         today_date = datetime.now().strftime('%Y-%m-%d')
-        
-        # 1. Database માં Payment રેકોર્ડ Insert કરવો
         insert_sql = """
             INSERT INTO payment (paymentdate, teacherid, amount, mode)
             VALUES (%s, %s, %s, %s)
@@ -105,8 +103,6 @@ def SendPayoutEmail(payout_data):
         cursor.execute(insert_sql, (today_date, payout_data['teacher_id'], payout_data['total_amount'], payment_mode))
         database.connect.commit()
         print(f"\n[+] Payment record inserted successfully into Database!")
-        
-        # 2. PDF ફાઈલ તૈયાર કરવી
         filename = f"Payout_{payout_data['teacher_name'].replace(' ', '_')}.pdf"
         mode_names = {1: "Cash", 2: "Cheque", 3: "Online"}
         selected_mode_str = mode_names.get(payment_mode, "Unknown")

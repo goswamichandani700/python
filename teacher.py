@@ -62,7 +62,6 @@ def UpdateTeacher():
 
 
 def DeleteTeacher():
-    # is_deleted=0 ઉમેર્યું છે
     sql = "UPDATE teacher SET is_deleted=1 WHERE id=%s AND is_deleted=0"
 
     try:
