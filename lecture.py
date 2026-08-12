@@ -27,14 +27,14 @@ def InsertLecture():
         """
         values = [teacherid, subjectid, batchid, duration, amount, lecturedate]
 
-        # Execute અને Commit
+        # Execute and Commit
         cursor.execute(sql, values)
         database.connect.commit()
 
         print(f"\n[+] Lecture inserted successfully! Calculated Amount: {amount:.2f}\n")
 
     except ValueError:
-        print("\n[-] Error: Teacher ID, Subject ID, Batch ID અને Duration ફક્ત નંબર જ હોવા જોઈએ.\n")
+        print("\n[-] Error: Teacher ID, Subject ID, Batch ID and Duration (only integer)\n")
     except MySQLError as err:
         database.connect.rollback()
         print(f"\n[-] Database Error: {err}\n")

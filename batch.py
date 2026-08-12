@@ -22,7 +22,7 @@ def InsertBatch():
             cursor.close()
 
     except ValueError:
-        print("Error: Course ID શુદ્ધ નંબર (Integer) હોવો જોઈએ.")
+        print("Error: Course ID (integer)")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
@@ -53,7 +53,7 @@ def UpdateBatch():
             cursor.close()
 
     except ValueError:
-        print("Error: Batch ID અને Course ID ફક્ત નંબર જ હોવા જોઈએ.")
+        print("Error: Batch ID and Course ID (only integer).")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
@@ -78,7 +78,7 @@ def DeleteBatch():
             cursor.close()
 
     except ValueError:
-        print("Error: Batch ID ફક્ત નંબર જ હોવો જોઈએ.")
+        print("Error: Batch ID (integer).")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
@@ -143,6 +143,6 @@ def SearchBatch():
             cursor.close()
 
     except ValueError:
-        print("Error: Course ID ફક્ત નંબર જ હોવો જોઈએ.")
+        print("Error: Course ID (integer).")
     except MySQLError as err:
         print(f"Database Error: {err}")

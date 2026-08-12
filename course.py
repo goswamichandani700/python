@@ -22,7 +22,7 @@ def InsertCourse():
             cursor.close()
 
     except ValueError:
-        print("Error: Duration અને Fees ફક્ત નંબર જ હોવા જોઈએ.")
+        print("Error: Duration and Fees (only integer).")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
@@ -53,7 +53,7 @@ def UpdateCourse():
             cursor.close()
 
     except ValueError:
-        print("Error: ID, Duration અને Fees માટે યોગ્ય નંબર જ નાખો.")
+        print("Error: ID, Duration and Fees માટે ")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
@@ -78,7 +78,7 @@ def DeleteCourse():
             cursor.close()
 
     except ValueError:
-        print("Error: Course ID શુદ્ધ નંબર જ હોવો જોઈએ.")
+        print("Error: Course ID (integer).")
     except MySQLError as err:
         database.connect.rollback()
         print(f"Database Error: {err}")
