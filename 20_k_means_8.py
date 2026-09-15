@@ -5,9 +5,6 @@
 #  Vibration Level g
 #  Operating Temperature C
 
-# Finding the value of k Elbow Method
-# Run KMeans for different values of k The elbow appears at k  3
-
 # Clusters k  3
 
 #  Cluster 1  Healthy Machine Low vibration and normal operating temperature

@@ -7,8 +7,6 @@
 #  Distance from Usual Location km
 #  POS Entry Mode
 
-# Finding the value of k Elbow Method
-# Scale the four features between 0 and 1 and run KMeans for different values of k The elbow appears at k  4
 
 # Clusters k  4
 

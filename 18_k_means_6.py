@@ -7,8 +7,6 @@
 #  Phosphorus mgkg
 #  Electrical Conductivity dSm
 
-# Finding the value of k Elbow Method
-# Run KMeans for k  1 to 7 and calculate WCSS The elbow appears at k  3
 
 # Clusters k  3
 

@@ -7,8 +7,6 @@
 #  International SMS Count
 #  OffPeak Data Usage Ratio
 
-# Finding the value of k Elbow Method
-# Run KMeans for different values of k and calculate inertia The elbow graph shows a clear bend at k  3
 
 # Clusters k  3
 
