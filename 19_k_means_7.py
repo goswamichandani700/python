@@ -39,10 +39,19 @@ print("labels = ",labels)
 print(model.cluster_centers_)
 
 #display data
-customers = ["Aarav","Vivaan","Aditya","Arjun","Rohan","Krish","Ishaan","Kabir","Aryan","Vihaan","Rahul","Raj","Dev","Yash","Dhruv","Kunal","Aman","Harsh","Nikhil","Manav","Anaya","Diya","Ira","Myra","Sara","Kiara","Riya","Avni","Tara","Meera","Aanya","Pihu","Navya","Siya","Aadhya","Pari","Anika","Ishita","Mahi","Kavya","Jay","Rajesh","Mihir","Nirav","Bhavin","Parth","Meet","Yug","Darsh","Devansh"]
-
-for customer,spending,label in zip(customers,X.flatten(),labels):
-    print(f"Name : {customer} spending score = {spending} label = {label}")
+traffic = ["Traffic 1","Traffic 2","Traffic 3","Traffic 4","Traffic 5",
+"Traffic 6","Traffic 7","Traffic 8","Traffic 9","Traffic 10",
+"Traffic 11","Traffic 12","Traffic 13","Traffic 14","Traffic 15",
+"Traffic 16","Traffic 17","Traffic 18","Traffic 19","Traffic 20",
+"Traffic 21","Traffic 22","Traffic 23","Traffic 24","Traffic 25",
+"Traffic 26","Traffic 27","Traffic 28","Traffic 29","Traffic 30",
+"Traffic 31","Traffic 32","Traffic 33","Traffic 34","Traffic 35",
+"Traffic 36","Traffic 37","Traffic 38","Traffic 39","Traffic 40",
+"Traffic 41","Traffic 42","Traffic 43","Traffic 44","Traffic 45",
+"Traffic 46","Traffic 47","Traffic 48","Traffic 49","Traffic 50"] 
+ 
+for traffic_name,spending,label in zip(traffic,X.flatten(),labels):
+    print(f"Name : {traffic_name} spending score = {spending} label = {label}")
 
 #create chart
 plt.scatter(labels,X[:,0],s=10)

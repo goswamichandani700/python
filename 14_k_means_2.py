@@ -6,8 +6,6 @@
 #  Purchase Frequency ordersyear
 #  Average Return Rate 
 
-# Finding the value of k Elbow Method
-# First standardize all three features using zscore Then run KMeans for k  1 to 8 and calculate WCSS From the elbow graph a clear bend can be seen at k  4
 
 # Clusters k  4
 
