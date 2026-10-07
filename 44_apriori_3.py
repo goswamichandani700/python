@@ -1,0 +1,234 @@
+'''
+### Movie Recommendation Using Apriori
+In this example, the Apriori algorithm is used to discover relationships between movies based on users' movie preferences. A real-world MovieLens dataset is used, where each user has rated multiple movies.
+For association rule mining, movies with a sufficiently high rating are considered movies that the user **liked**. Each user's collection of liked movies is treated as a single transaction. Apriori then identifies frequently occurring combinations of movies and generates association rules based on their support, confidence, and lift.
+
+For example, if many users who liked **Movie A** also liked **Movie B**, Apriori may generate the rule:
+
+**Movie A → Movie B**
+
+This rule can then be used to recommend **Movie B** to users who have shown interest in **Movie A**.
+
+The objective of this example is to demonstrate how **Association Rule Learning can be applied to a real-world movie recommendation problem**.
+
+dataset download link - https://grouplens.org/datasets/movielens/100k/
+'''
+
+import pandas as pd
+from mlxtend.preprocessing import TransactionEncoder
+from mlxtend.frequent_patterns import apriori, association_rules
+
+# Load ratings
+ratings = pd.read_csv(
+    "ml-100k/u.data",
+    sep="\t",
+    names=["UserID", "MovieID", "Rating", "Timestamp"]
+)
+
+movies = pd.read_csv(
+    "ml-100k/u.item",
+    sep="|",
+    encoding="latin-1",
+    header=None,
+    usecols=[0, 1],
+    names=["MovieID", "MovieTitle"]
+)
+# Keep movies that users liked
+liked = ratings[ratings["Rating"] >= 4]
+
+# Add movie names
+liked = liked.merge(
+    movies,
+    on="MovieID"
+)
+
+# Create one transaction for each user
+transactions = (
+    liked.groupby("UserID")["MovieTitle"]
+    .apply(list)
+    .tolist()
+)
+# print(transactions[0:5])
+# exit(1)
+# Convert transactions to binary format
+encoder = TransactionEncoder()
+data = encoder.fit_transform(transactions)
+df = pd.DataFrame(data,columns=encoder.columns_)
+print("NUMBER OF USERS:", len(transactions))
+print("NUMBER OF MOVIES:", len(df.columns))
+print(df.head())
+# exit(1)
+# Find frequent movie combinations
+frequent_itemsets = apriori(df,min_support=0.05,use_colnames=True)
+print("\nFREQUENT MOVIE ITEMSETS")
+# print(frequent_itemsets)
+# exit(1)
+# Generate association rules
+rules = association_rules(
+    frequent_itemsets,
+    metric="confidence",
+    min_threshold=0.50
+)
+
+# Keep useful columns
+rules = rules[
+    [
+        "antecedents",
+        "consequents",
+        "support",
+        "confidence",
+        "lift"
+    ]
+]
+
+# Keep positive associations
+rules = rules[rules["lift"] >= 1.5]
+rules = rules[rules["consequents"].apply(lambda x: len(x) == 1)]
+# Sort by lift
+rules = rules.sort_values("lift",ascending=False)
+
+print("\nMOVIE ASSOCIATION RULES")
+
+for _, rule in rules.head(20).iterrows():
+
+    antecedent = ", ".join(rule["antecedents"])
+    consequent = ", ".join(rule["consequents"])
+
+    print(f"{antecedent} -> {consequent}")
+    print(f"Support: {rule['support']:.2%}")
+    print(f"Confidence: {rule['confidence']:.2%}")
+    print(f"Lift: {rule['lift']:.2f}")
+    print("-" * 50)
+
+#task
+# remove duplicate entry skip entry with lower confidence
+# export data into mysql format
+
+# Remove duplicate entry
+# Keep entry with higher confidence
+
+rules['itemset_pair'] = rules.apply( lambda x: frozenset([x['antecedents'], x['consequents']]),axis=1)
+
+# Sort by confidence - highest first
+rules = rules.sort_values(by='confidence',ascending=False)
+
+# Remove duplicate pair
+# Keep first entry = highest confidence
+rules = rules.drop_duplicates(subset=['itemset_pair'],keep='first')
+
+# Remove helper column
+rules = rules.drop(columns=['itemset_pair'])
+
+# Sort by lift
+rules = rules.sort_values(by='lift',ascending=False)
+
+
+# Print final rules
+
+print("\nMOVIE ASSOCIATION RULES")
+
+print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+
+
+# Print rules one by one
+
+for _, rule in  rules.head(20).iterrows():
+
+    print("".join(rule['antecedents']), end=' -> ')
+    print("".join(rule['consequents']))
+
+    print("Support:", round(rule['support'], 2))
+    print("Confidence:", round(rule['confidence'], 2))
+    print("Lift:", round(rule['lift'], 2))
+
+    print("-" * 100)
+
+# ============================================================
+# WRITE DATA INTO MYSQL SQL FILE
+# ============================================================
+
+# 1. Convert frozensets to comma-separated strings
+# for MySQL compatibility
+
+rules['antecedents'] = rules['antecedents'].apply(
+    lambda item: ', '.join(list(item))
+)
+
+rules['consequents'] = rules['consequents'].apply(
+    lambda item: ', '.join(list(item))
+)
+
+
+# 2. Round numerical metrics
+
+numeric_columns = [
+    'support',
+    'confidence',
+    'lift'
+]
+
+for col in numeric_columns:
+    if col in rules.columns:
+        rules[col] = rules[col].round(2)
+
+
+# 3. Create SQL file
+
+file_name = "movie_rules.sql"
+
+sql_file = open(
+    file_name,
+    "w",
+    encoding="utf-8"
+)
+
+
+# 4. Create MySQL table
+
+sql_file.write("""
+CREATE TABLE movie_association_rules (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    antecedents TEXT,
+    consequents TEXT,
+    support DECIMAL(10,2),
+    confidence DECIMAL(10,2),
+    lift DECIMAL(10,2)
+);
+
+""")
+
+
+# 5. Insert data into SQL file
+
+for index, rule in rules[
+    [
+        'antecedents',
+        'consequents',
+        'support',
+        'confidence',
+        'lift'
+    ]
+].iterrows():
+
+    antecedent = rule['antecedents'].replace("'", "''")
+    consequent = rule['consequents'].replace("'", "''")
+
+    sql_file.write(
+        "INSERT INTO movie_association_rules "
+        "(antecedents, consequents, support, confidence, lift) "
+        "VALUES "
+        f"('{antecedent}', "
+        f"'{consequent}', "
+        f"{rule['support']}, "
+        f"{rule['confidence']}, "
+        f"{rule['lift']});\n"
+    )
+
+
+# 6. Close SQL file
+
+sql_file.close()
+
+
+print("\nMYSQL FILE CREATED SUCCESSFULLY!")
+print(file_name)    
